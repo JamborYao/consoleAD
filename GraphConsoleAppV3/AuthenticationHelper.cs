@@ -103,7 +103,7 @@ namespace GraphConsoleAppV3
                 }
 
                 Console.WriteLine("\n Welcome " + userAuthnResult.UserInfo.GivenName + " " +
-                                              userAuthnResult.UserInfo.FamilyName);
+                                              userAuthnResult.UserInfo.FamilyName); 
             }
             return TokenForUser;
         }
