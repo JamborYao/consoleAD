@@ -85,25 +85,33 @@ namespace GraphConsoleAppV3
             {
                 string AuthString = "https://login.microsoftonline.com/";
                 string ResourceUrl = "https://graph.windows.net";
-                string ClientId = "***";
+                string ClientId = "2ec9eead-19e6-455e-a921-791eda349332";
                 var redirectUri = new Uri("https://localhost");
                 string  TenantId = "e4162ad0-e9e3-4a16-bf40-0d8a906a06d4";
-                AuthenticationContext authenticationContext = new AuthenticationContext(AuthString, false);
+                AuthenticationContext authenticationContext = new AuthenticationContext(AuthString+TenantId, false);
                 AuthenticationResult userAuthnResult = await authenticationContext.AcquireTokenAsync(ResourceUrl,
                     ClientId, redirectUri, new PlatformParameters(PromptBehavior.RefreshSession));
                 TokenForUser = userAuthnResult.AccessToken;
-                var client = new HttpClient();
-                var uri = $"https://graph.windows.net/{TenantId}/users?api-version=1.6";
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", TokenForUser);
-                var response = await client.GetAsync(uri);
-                if (response.Content != null)
-                {
-                    var responseString = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(responseString);
-                }
 
-                Console.WriteLine("\n Welcome " + userAuthnResult.UserInfo.GivenName + " " +
-                                              userAuthnResult.UserInfo.FamilyName); 
+
+
+
+
+
+
+
+                //var client = new HttpClient();
+                //var uri = $"https://graph.windows.net/{TenantId}/users?api-version=1.6";
+                //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", TokenForUser);
+                //var response = await client.GetAsync(uri);
+                //if (response.Content != null)
+                //{
+                //    var responseString = await response.Content.ReadAsStringAsync();
+                //    Console.WriteLine(responseString);
+                //}
+
+                //Console.WriteLine("\n Welcome " + userAuthnResult.UserInfo.GivenName + " " +
+                //                              userAuthnResult.UserInfo.FamilyName); 
             }
             return TokenForUser;
         }

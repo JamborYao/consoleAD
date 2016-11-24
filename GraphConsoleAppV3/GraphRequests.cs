@@ -30,7 +30,22 @@ namespace GraphConsoleAppV3
             try
             {
                 client = AuthenticationHelper.GetActiveDirectoryClientAsUser();
-                //var users = client.Users.ExecuteAsync().Result.CurrentPage.ToList();
+                var users = client.Users.ExecuteAsync().Result.CurrentPage.ToList();
+
+                foreach (IUser user in users)
+                {
+                    //Console.WriteLine("User {0} Sign in Name: {1}  UPN: {2}",
+                    //index, user., user.UserPrincipalName);
+                  //  Console.WriteLine("User {0} details:", index);
+                    Console.WriteLine("User Principal Name(UPN):{0}", user.UserPrincipalName);
+                    Console.WriteLine("Display Name:{0}", user.DisplayName);
+                    Console.WriteLine("Sign in Name:{0}", user.SignInNames);
+                    Console.WriteLine("User Type:{0}", user.UserType);
+
+                   // index++;
+                }
+
+
                 //var group = client.Groups.ExecuteAsync().Result.CurrentPage.ToList();
 
                 var groups = await client.Groups
